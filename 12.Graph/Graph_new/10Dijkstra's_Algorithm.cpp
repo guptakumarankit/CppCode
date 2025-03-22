@@ -7,6 +7,10 @@
         V = number of vertices
 */
 
+#include <bits/stdc++.h>
+#include<vector>
+using namespace std;
+
 class Solution
 {
 	public:
@@ -38,6 +42,46 @@ class Solution
         return result;
     }
 };
+
+
+int main() {
+    cout<<"Enter the number of vertices and edges:"<<endl;
+    int V, E;
+    cin >> V >> E;
+    vector<vector<int>> adj[V];
+
+    for(int i=0;i<=E;i++) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        adj[u].push_back({v,w});
+        adj[v].push_back({u,w});
+    }
+
+    int src;
+    cin >> src;
+
+    Solution obj;
+    vector<int> res = obj.dijkstra(V , adj, src);
+
+    for (int i = 0; i < V; i++){
+        cout << res[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
+
+// INPUT 
+// 2 1
+// 0 1 9
+// 1 0 9
+
+// SOURCE 
+// 0
+
+// OUTPUT 
+// 0 9 
+
+
 
 /*      
         Approach - 2(using set)

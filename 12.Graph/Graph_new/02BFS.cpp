@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
   public:
     // Function to return Breadth First Traversal of given graph.
@@ -23,7 +26,7 @@ class Solution {
             }
         }
     }
-
+  
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
         vector<int>result;
         vector<bool>visited(V,false);
@@ -31,3 +34,36 @@ class Solution {
         return result;
     }
 };
+
+
+int main() {
+    cout<<"Enter the vertices and Edges"<<endl;
+    int V, E;
+    cin >> V >> E;
+
+    // Now using vector of vectors instead of array of vectors
+    vector<int>adj[V];
+
+    for (int i = 0; i < E; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u); // For undirected graph, add both u->v and v->u
+    }
+
+    Solution obj;
+    vector<int> ans = obj.bfsOfGraph(V,adj);
+    for (int i = 0; i < ans.size(); i++) {
+        cout << ans[i] << " ";
+    }
+    return 0;
+}
+
+// INPUT : 
+// 5 4
+// 0 2
+// 0 3
+// 0 1
+// 2 4
+
+// OUTPUT :- 0 2 3 1 4

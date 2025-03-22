@@ -1,6 +1,7 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
+
 int isDivisible(string s){
 	    //complete the function here
 	     int sum = 0;
