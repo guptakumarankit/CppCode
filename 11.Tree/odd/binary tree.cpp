@@ -4,10 +4,10 @@ using namespace std;
 
 int isDivisible(string s){
 	    //complete the function here
-	     int sum = 0;
+	    int sum = 0;
 	    for(int i=s.size();i>=0;i--){
 	        int temp =pow(2,i);
-	        sum+=s[i]*temp;
+	        sum += s[i]*temp;
 	    }
         return sum;
 }
@@ -18,5 +18,5 @@ int main(){
     cout<<"Enter the string"<<endl;
     cin>>s;
     cout<<isDivisible(s);
-
+	return 0;
 }

@@ -40,7 +40,7 @@ Node* buildTree(){
 
 void preorder(Node* &root){
     // base case
-     if(root == NULL)
+    if(root == NULL)
         return;
     // ROOT
     cout<<root->data<<" ";
