@@ -1,47 +1,89 @@
-/*  Floyd Warshall
-It is used to find the shortest paths between all pairs of 
-nodes in a weighted graph. This algorithm is highly efficient 
-and can handle graphs with both positive and negative edge 
-weights, making it a versatile tool for solving a wide range 
-of network and connectivity problems. 
+#include <bits/stdc++.h>
+using namespace std;
 
-   Time Complexity -> O(n^3).
-   Space Complexity -> O(n).
+/*
+    Floyd Warshall Algorithm
+    Finds shortest paths between all pairs of nodes in a weighted graph.
+    Handles positive and negative edge weights (but not negative cycles).
+
+    Time Complexity -> O(n^3)
+    Space Complexity -> O(n^2)
 */
 
-// User function template for C++
-
 class Solution {
-  public:
-	void shortest_distance(vector<vector<int>>&matrix){
-         
-         // step-1 initilize matrix value is negative then intilize will be infinity.
-         int n = matrix.size();
+public:
+    void shortest_distance(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        const int INF = 1e7;
 
-         for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
+        // Step 1: Initialize -1 to INF
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
                 if(matrix[i][j] == -1){
-                    matrix[i][j] = 10000000;
+                    matrix[i][j] = INF;
+                }
+                if(i == j) matrix[i][j] = 0; // distance to self = 0
+            }
+        }
+
+        // Step 2: Update minimum distances using all intermediate nodes
+        for(int via = 0; via < n; via++){
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n; j++){
+                    if(matrix[i][via] != INF && matrix[via][j] != INF)
+                        matrix[i][j] = min(matrix[i][j], matrix[i][via] + matrix[via][j]);
                 }
             }
-         }
-         
-         // Step-2 find minimum distance 
-         for(int via = 0; via < n; via++){
-             for(int i=0;i<n;i++){
-                 for(int j=0;j<n;j++){
-                     matrix[i][j] = min(matrix[i][j] , matrix[i][via] + matrix[via][j]);
-                 }
-             }
-         }
-            	
-         // after update value negative value is replace by -1.
-         for(int i=0;i<n;i++){
-             for(int j=0;j<n;j++){
-                 if(matrix[i][j] == 10000){
-                     matrix[i][j] = -1;
-                 }
-             }
-         }
-	}
+        }
+
+        // Step 3: Replace INF back to -1
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] == INF) matrix[i][j] = -1;
+            }
+        }
+    }
 };
+
+int main() {
+    int n;
+    cout << "Enter number of vertices: ";
+    cin >> n;
+
+    vector<vector<int>> matrix(n, vector<int>(n));
+    cout << "Enter adjacency matrix (-1 for no edge):\n";
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            cin >> matrix[i][j];
+        }
+    }
+
+    Solution sol;
+    sol.shortest_distance(matrix);
+
+    cout << "Shortest distance matrix:\n";
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            if(matrix[i][j] == -1) cout << "INF ";
+            else cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+/*
+Sample Input:
+4
+0 5 -1 10
+-1 0 3 -1
+-1 -1 0 1
+-1 -1 -1 0
+
+Expected Output:
+0 5 8 9
+INF 0 3 4
+INF INF 0 1
+INF INF INF 0
+*/

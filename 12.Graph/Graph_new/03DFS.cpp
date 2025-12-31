@@ -1,4 +1,7 @@
-class Solution {
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution1 {
   public:
     // Function to return a list containing the DFS traversal of the graph.
     void Dfs(unordered_map<int,vector<int>>&adj,int u,vector<bool>&visited,vector<int>&result){
@@ -34,9 +37,6 @@ class Solution {
     }
 };
 
-
-#include <bits/stdc++.h>
-using namespace std;
 
 
 class Solution {
@@ -80,6 +80,8 @@ int main() {
 
     Solution obj;
     vector<int> ans = obj.dfsOfGraph(V , adj);
+
+    
     for (int i = 0; i < ans.size(); i++) {
         cout << ans[i] << " ";
     }
