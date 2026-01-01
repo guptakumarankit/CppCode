@@ -15,8 +15,7 @@ struct TreeNode {
 // Time Complexity -> O(n^2).
 // S.C -> O(N).
 
-
-class Solution {
+class SolutionBrute {
     public:
     int height(TreeNode* root){
         if(root == NULL) return 0;
@@ -38,7 +37,7 @@ class Solution {
 // T.C -> O(N).
 // S.C -> O(N).
 
-class Solution {
+class SolutionOptimized {
     public:
     int height(TreeNode* root,bool &bal){
 
@@ -60,3 +59,41 @@ class Solution {
         return bal;
     }
 };
+
+TreeNode* buildTree(){
+    cout<<"Enter the value of data: "<<endl;
+    int data;
+    cin>>data;
+
+    if(data == -1)
+      return NULL;
+    
+    // initially value.....
+    TreeNode*newNode = new TreeNode(data);
+
+    cout<<"Enter the data for left child of :"<<data<<endl;
+    newNode->left = buildTree();
+
+    cout<<"Enter the data for right child of :"<<data<<endl;
+    newNode->right = buildTree();
+
+    return newNode;
+}
+
+int main() {
+    // Take input
+    TreeNode* root = buildTree();
+
+    // Call brute force approach
+    SolutionBrute brute;
+    cout << brute.isBalanced(root) << endl;
+
+    // Call optimized approach
+    SolutionOptimized opt;
+    cout << opt.isBalanced(root) << endl;
+
+    return 0;
+}
+
+
+

@@ -9,12 +9,21 @@ class Node{
     Node* left;
     Node* right;
 
+    // constructor 
     Node(int d){
         data = d;
         left = NULL;
         right = NULL;
     }
 };
+
+void inorderTraversal(Node* root){
+    if(root == NULL) return;
+    
+    inorderTraversal(root->left);
+    cout<<root->data<<" ";
+    inorderTraversal(root->right);
+}
 
 Node* buildTree(){
     cout<<"Enter the value of data: "<<endl;
@@ -39,4 +48,6 @@ Node* buildTree(){
 int main(){
     Node* root = NULL;
     root = buildTree();
+    inorderTraversal(root);
+    return 0;
 }

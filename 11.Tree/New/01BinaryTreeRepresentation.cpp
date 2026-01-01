@@ -22,10 +22,18 @@ struct Node {
         // node to the passed integer
         data = val;   
         // Initialize left and 
-        //r ight pointers as NULL
+        //right pointers as NULL
         left = right = NULL;  
     }
 };
+
+void inorderTraversal(Node* root){
+    if(root == NULL) return;
+    
+    inorderTraversal(root->left);
+    cout<<root->data<<" ";
+    inorderTraversal(root->right);
+}
 
 int main() {
     // Creating a new node for the root of the 
@@ -38,4 +46,7 @@ int main() {
     // Creating a right child node for
     // the left child node of the root
     root->left->right = new Node(5);
+
+    inorderTraversal(root);
+    return 0;
 }
